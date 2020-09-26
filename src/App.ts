@@ -1,23 +1,27 @@
-import express from 'express';
-import cors from 'cors';
-import 'dotenv/config';
+import express from "express";
+import cors from "cors";
+import "dotenv/config";
+
+import "./database";
+
+import Routes from "./routes";
 
 class App {
-  public express: express.Application
+  public express: express.Application;
 
-  public constructor () {
+  public constructor() {
     this.express = express();
     this.middlewares();
     this.routes();
   }
 
-  private middlewares (): void {
+  private middlewares(): void {
     this.express.use(cors());
     this.express.use(express.json());
   }
 
-  private routes (): void {
-    this.express.get('/', (req, res) => res.send('Hello World!!'));
+  private routes(): void {
+    this.express.use("/api", Routes);
   }
 }
 
